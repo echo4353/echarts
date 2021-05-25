@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>地图</title>
+    <style>
+        html{height: 100%}
+        body{height: 100%;margin: 0}
+        #main{
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<!--建立dom 容器-->
+<div id="main"></div>
+<!--引入echarts-->
+<script src="../js/echarts.min.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=EcMeTlWuNyyqL4GwZT5Nmlj9mtpvhE9Y"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
+<script>
+    let dom = document.getElementById("main");
+    let chart = echarts.init(dom);
+
+    const mapStyleJson=[
+        {
+            "featureType": "water",
+            "elementType": "all",
+            "stylers": {
+                "color": "#044161"
+            }
+        },
+        {
+            "featureType": "land",
+            "elementType": "all",
+            "stylers": {
+                "color": "#004981"
+            }
+        },
+        {
+            "featureType": "boundary",
+            "elementType": "geometry",
+            "stylers": {
+                "color": "#064f85"
+            }
+        },
+        {
+            "featureType": "railway",
+            "elementType": "all",
+            "stylers": {
+                "visibility": "off"
+            }
+        },
+        {
+            "featureType": "highway",
+            "elementType": "geometry",
+            "stylers": {
+                "color": "#004981"
+            }
+        },
+        {
+            "featureType": "highway",
+            "elementType": "geometry.fill",
+            "stylers": {
+                "color": "#005b96",
+                "lightness": 1
+            }
+        },
+        {
+            "featureType": "highway",
+            "elementType": "labels",
+            "stylers": {
+                "visibility": "off"
+            }
+        },
+        {
+            "featureType": "arterial",
+            "elementType": "geometry",
+            "stylers": {
+                "color": "#004981"
+            }
+        },
+        {
+            "featureType": "arterial",
+            "elementType": "geometry.fill",
+            "stylers": {
+                "color": "#00508b"
+            }
+        },
+        {
+            "featureType": "poi",
+            "elementType": "all",
+            "stylers": {
+                "visibility": "off"
+            }
+        },
+        {
+            "featureType": "green",
+            "elementType": "all",
+            "stylers": {
+                "color": "#056197",
+                "visibility": "off"
+            }
+        },
+        {
+            "featureType": "subway",
+            "elementType": "all",
+            "stylers": {
+                "visibility": "off"
+            }
+        },
+        {
+            "featureType": "manmade",
+            "elementType": "all",
+            "stylers": {
+                "visibility": "off"
+            }
+        },
+        {
+            "featureType": "local",
+            "elementType": "all",
+            "stylers": {
+                "visibility": "off"
+            }
+        },
+        {
+            "featureType": "arterial",
+            "elementType": "labels",
+            "stylers": {
+                "visibility": "off"
+            }
+        },
+        {
+            "featureType": "boundary",
+            "elementType": "geometry.fill",
+            "stylers": {
+                "color": "#029fd4"
+            }
+        },
+        {
+            "featureType": "building",
+            "elementType": "all",
+            "stylers": {
+                "color": "#1a5787"
+            }
+        },
+        {
+            "featureType": "label",
+            "elementType": "all",
+            "stylers": {
+                "visibility": "off"
+            }
+        }
+    ]
+
+    const option = {
+        /*
+        * bmap 百度地图
+        *   center[经度,纬度] 地图中心点位，如[104.114129, 37.550339]
+        *   zoom 缩放级别
+        *   roam 是否可以拖拽缩放
+        *       scale
+        *       move
+        *       true
+        *   mapStyle 地图样式
+        *       styleJson json类型的样式
+        * */
+        bmap:{
+            /*center:[104.114129, 37.550339],
+            zoom:3,
+            roam:'move',
+            mapStyle:{
+                styleJson:mapStyleJson
+            }*/
+        }
+
+    };
+    chart.setOption(option, true);
+
+    /*获取百度地图的实例*/
+    const map=chart.getModel().getComponent('bmap').getBMap();
+
+    var point = new BMap.Point(116.404, 39.915);
+
+    /*中心位，缩放级别*/
+    map.centerAndZoom(point, 15);
+
+    /*实例化标注对象*/
+    var marker = new BMap.Marker(point);
+    map.addOverlay(marker);
+
+    map.setMapStyleV2({
+        styleId: '3d464bd88d30c0f6bbbc86d22efa5694'
+    });
+
+</script>
+</body>
+</html>

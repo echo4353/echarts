@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>三维</title>
+    <style>
+        #main{
+            width: 100%;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+<!--建立dom 容器-->
+<div id="main"></div>
+<!--引入echarts-->
+<script src="../js/echarts.min.js"></script>
+<script src="../js/echarts-gl.min.js"></script>
+<script>
+    // 基于准备好的dom，初始化echarts实例
+    const dom= document.getElementById('main');
+    const myChart = echarts.init(dom,null,{renderer: 'canvas'});
+    // const myChart = echarts.init(dom,null,{renderer: 'svg'});
+
+
+    /*生成三维点集*/
+    // 创建一个高斯分布函数
+    const gaussian = makeGaussian(50, 0, 0, 20, 20);
+    const data = [];
+    for (let i = 0; i < 100; i++) {
+        // x, y 随机分布
+        let x = Math.random() * 100 - 50;
+        let y = Math.random() * 100 - 50;
+        let z = gaussian(x, y);
+        data.push([x, y, z]);
+    }
+    console.log('data',data)
+
+
+    const option = {
+        grid3D: {},
+        xAxis3D: {},
+        yAxis3D: {},
+        zAxis3D: {},
+        series: [{
+            type: 'scatter3D',
+            data: data,
+            itemStyle:{
+                opacity:0.5
+            }
+        }]
+    }
+
+
+    // 绘制图表
+    myChart.setOption(option);
+
+
+    /*高斯方法*/
+    function makeGaussian(amplitude, x0, y0, sigmaX, sigmaY) {
+        return function (amplitude, x0, y0, sigmaX, sigmaY, x, y) {
+            let exponent = -(
+                ( Math.pow(x - x0, 2) / (2 * Math.pow(sigmaX, 2)))
+                + ( Math.pow(y - y0, 2) / (2 * Math.pow(sigmaY, 2)))
+            );
+            return amplitude * Math.pow(Math.E, exponent);
+        }.bind(null, amplitude, x0, y0, sigmaX, sigmaY);
+    }
+</script>
+</body>
+</html>

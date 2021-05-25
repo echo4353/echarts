@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>大屏</title>
+    <!--页面样式-->
+    <link rel="stylesheet" href="./css/common.css">
+    <style>
+        /*隐藏百度地图logo*/
+        .anchorBL{
+            display:none;
+        }
+    </style>
+</head>
+<!--body 尺寸1920*1080-->
+<body>
+<!--头部，高度99-->
+<div class="head">
+    <h1>西虹市人民经济情况可视化</h1>
+    <div class="weather">
+        <span id="showTime">2020-01-15 23:51:45</span>
+    </div>
+</div>
+<!--主体部分-->
+<div class="mainbox">
+    <ul class="clearfix">
+        <!--左边列-->
+        <li>
+            <!--列高313，下边距14-->
+            <div class="boxall">
+                <div class="allnav" id="echart1"></div>
+                <div class="boxfoot"></div>
+            </div>
+            <div class="boxall">
+                <div class="allnav" id="echart2"></div>
+                <div class="boxfoot"></div>
+            </div>
+            <div class="boxall">
+                <div class="allnav" id="echart3"></div>
+                <div class="boxfoot">
+
+                </div>
+            </div>
+        </li>
+        <!--中间列-->
+        <li>
+            <div class="bar">
+                <div class="barbox">
+                    <ul class="clearfix">
+                        <li class="pulll_left counter">12581189</li>
+                        <li class="pulll_left counter">3912410</li>
+                    </ul>
+                </div>
+                <div class="barbox2">
+                    <ul class="clearfix">
+                        <li class="pulll_left">2019年总收入情况 </li>
+                        <li class="pulll_left">2019年总支出情况</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="map">
+                <div class="map1"><img src="./images/lbx.png"></div>
+                <div class="map2"><img src="./images/jt.png"></div>
+                <div class="map3"><img src="./images/map.png"></div>
+                <div class="map4" id="map_1"></div>
+            </div>
+        </li>
+        <!--右边列-->
+        <li>
+            <div class="boxall">
+                <div class="allnav" id="echart4"></div>
+                <div class="boxfoot"></div>
+            </div>
+            <div class="boxall">
+                <div class="allnav" id="echart5"></div>
+                <div class="boxfoot"></div>
+            </div>
+            <div class="boxall pd0">
+                <div class="allnav" id="echart6"></div>
+                <div class="boxfoot"></div>
+            </div>
+        </li>
+    </ul>
+</div>
+<script src="./js/echarts.min.js"></script>
+<script src="./js/walden.js"></script>
+<!--<script src="./js/walden2.js"></script>-->
+
+<script src="js/echart1.js"></script>
+<script src="js/echart2.js"></script>
+<script src="js/echart3.js"></script>
+<script src="js/echart4.js"></script>
+<script src="js/echart5.js"></script>
+
+
+<script src="https://api.map.baidu.com/api?v=3.0&ak=EcMeTlWuNyyqL4GwZT5Nmlj9mtpvhE9Y"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
+<script src="js/echart6.js"></script>
+
+<script src='./js/China.js'></script>
+<script src="js/echart7.js"></script>
+
+</body>
+</html>

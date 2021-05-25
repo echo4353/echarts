@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>折线</title>
+    <style>
+        #main{
+            margin: 20px;
+            width: 700px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+<!--建立dom 容器-->
+<div id="main"></div>
+<!--引入echarts-->
+<script src="../js/echarts.min.js"></script>
+<script>
+    // 基于准备好的dom，初始化echarts实例
+    const myChart = echarts.init(document.getElementById('main'));
+
+    /*时间，降水量，温度*/
+    const month=['1月','2月','3月'];
+    const precipitation=[5, 12, 40];
+    const temperature=[1, 2, 6];
+
+    /*配置项*/
+    const option = {
+        /*
+        * xAxis 轴{}
+        *   type 类型
+        *   data 数据
+        * */
+        xAxis: {
+            type:'category',
+            data:month
+        },
+        /*
+        * yAxis 轴[]
+        *   type 类型
+        *   name 名称
+        *   min 最小值
+        *   max 最大值
+        *   interval 间距
+        *   axisLabel x 轴标签
+        *       formatter 可视化，如'{value} ml'，'{value} °C'
+        * */
+        /*yAxis:{
+            type:'value',
+            axisLabel:{
+                formatter:'{value} ml'
+            }
+        },*/
+        yAxis:[
+            {
+                type:'value',
+                axisLabel:{
+                    formatter:'{value} ml'
+                },
+                min:0,
+                max:40,
+                interval:4,
+            },
+            {
+                type:'value',
+                axisLabel:{
+                    formatter:'{value} °C'
+                },
+                min:0,
+                max:10,
+                interval:1,
+            }
+        ],
+        /*
+        * series 系列列表
+        *   yAxisIndex 指定系列和那个轴映射
+        *
+        * */
+        series: [
+            {
+                name:'降水量',
+                type:'bar',
+                yAxisIndex:0,
+                data:precipitation
+            },
+            {
+                name:'温度',
+                type:'bar',
+                yAxisIndex:1,
+                data:temperature
+            },
+        ]
+    };
+
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</body>
+</html>

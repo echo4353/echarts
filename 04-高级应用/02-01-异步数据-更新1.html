@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>异步数据</title>
+    <style>
+        #main{
+            width: 100%;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+<!--建立dom 容器-->
+<div id="main"></div>
+<!--引入echarts-->
+<script src="../js/echarts.min.js"></script>
+<script>
+    const myChart = echarts.init(document.getElementById('main'));
+    fetch('../js/China.json')
+        .then((res) => res.json())
+        .then(data => {
+            /*请求到数据后更新*/
+            echarts.registerMap('china', data);
+            const option = {
+                title: {
+                    text: '中国地图',
+                    left:'center'
+                },
+                series: [{
+                    type: 'map',
+                    map: 'china'
+                }]
+            };
+            myChart.setOption(option);
+        })
+
+</script>
+</body>
+</html>

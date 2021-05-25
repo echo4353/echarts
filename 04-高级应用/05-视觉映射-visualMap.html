@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dataZoom</title>
+    <style>
+        #main{
+            margin: 20px;
+            width: 700px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+<!--建立dom 容器-->
+<div id="main"></div>
+<!--引入echarts-->
+<script src="../js/echarts.min.js"></script>
+<script>
+    // 基于准备好的dom，初始化echarts实例
+    const myChart = echarts.init(document.getElementById('main'));
+
+    let data1 = [];
+    let data2 = [];
+    let data3 = [];
+
+    let random = function (num) {
+        return (Math.random() * num).toFixed(1);
+    };
+
+    for (let i = 0; i < 100; i++) {
+        //             x            y       symbolSize
+        data1.push([random(30), random(20), random(30)]);
+        data2.push([random(30), random(20), random(30)]);
+        data3.push([random(30), random(20), random(30)]);
+    }
+
+
+    // 指定图表的配置项和数据
+    const option = {
+        animation: false,
+        legend: {
+            data: ['html', 'css', 'js']
+        },
+        tooltip: {},
+        /*
+        * x 轴
+        *   min 最小值
+        *       dataMin 取数据最小值
+        *   max 最大值
+        *       dataMax 取数据最大值
+        * */
+        xAxis: {
+            type: 'value',
+            min: 'dataMin',
+            max: 'dataMax',
+        },
+        yAxis: {
+            type: 'value',
+            min: 'dataMin',
+            max: 'dataMax',
+        },
+        /*
+        * dataZoom 区域缩放
+        *   type 缩放方式
+        *       inside 内置缩放，通过鼠标的平移缩放实现
+        *       slider 滑动条缩放
+        *   xAxisIndex 设置 dataZoom-inside 组件控制的 x轴
+        *       [n] 控制xAxis 中的索引位置为n 的轴
+        *   start 起始位，百分百 [0,100]
+        *   end 结束位，百分百 [0,100]
+        * */
+        dataZoom: [
+            {
+                type: 'slider',
+                show: true,
+                xAxisIndex: [0],
+                start: 0,
+                end: 100
+            },
+            {
+                type: 'slider',
+                show: true,
+                yAxisIndex: [0],
+                start: 0,
+                end: 100
+            },
+            {
+                type: 'inside',
+                xAxisIndex: [0],
+            },
+            {
+                type: 'inside',
+                yAxisIndex: [0],
+            }
+        ],
+        /*
+        * visualMap 视觉映射 {}
+        *   type 映射方式
+        *       continuous 连续型
+        *       piecewise 分段型
+        *   min 最小值，数值型
+        *   max 最大值，数值型
+        *   range [] 手柄位置，continuous
+        *   calculable 是否显示拖拽用的手柄
+        * */
+        visualMap:{
+            type:'continuous',
+            min:0,
+            max:30,
+            range:[0,10],
+            calculable:true
+        },
+
+
+        /*系列列表*/
+        series: [
+            {
+                name: '系列 1',
+                type: 'scatter',
+                itemStyle: {
+                    opacity: 0.8
+                },
+                symbolSize: function (val) {
+                    return val[2];
+                },
+                data: data1
+            },
+            {
+                name: '系列 2',
+                type: 'scatter',
+                itemStyle: {
+                    normal: {
+                        opacity: 0.8
+                    }
+                },
+                symbolSize: function (val) {
+                    return val[2];
+                },
+                data: data2
+            },
+            {
+                name: '系列 3',
+                type: 'scatter',
+                itemStyle: {
+                    normal: {
+                        opacity: 0.8,
+                    }
+                },
+                symbolSize: function (val) {
+                    return val[2];
+                },
+                data: data3
+            }
+        ]
+    }
+
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</body>
+</html>

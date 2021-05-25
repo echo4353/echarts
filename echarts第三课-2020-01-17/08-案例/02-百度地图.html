@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>百度地图</title>
+    <style>
+        html{height:100%}
+        body{height:100%;margin:0px;padding:0px}
+        #container{height:100%}
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=pcCGMUrFIbf6HGqBAqe3uTpuBARubui3"></script>
+</head>
+<body>
+    <div id="container"></div>
+    <script>
+        var map = new BMap.Map("container");
+        var point = new BMap.Point(116.404, 39.915);
+
+        /*中心位，缩放级别*/
+        map.centerAndZoom(point, 15);
+
+        /*鼠标滚轮缩放*/
+        map.enableScrollWheelZoom(true);
+
+        /*平移缩放控件*/
+        map.addControl(new BMap.NavigationControl());
+
+        /*实例化标注对象*/
+        var marker = new BMap.Marker(point);
+        map.addOverlay(marker);
+
+        /*3d464bd88d30c0f6bbbc86d22efa5694*/
+        map.setMapStyleV2({
+            styleId: '3d464bd88d30c0f6bbbc86d22efa5694'
+        });
+
+    </script>
+</body>
+</html>

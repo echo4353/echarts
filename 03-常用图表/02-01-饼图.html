@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>饼图</title>
+    <style>
+        #main{
+            margin: 20px;
+            width: 700px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+<!--建立dom 容器-->
+<div id="main"></div>
+<!--引入echarts-->
+<script src="../js/echarts.min.js"></script>
+<script>
+    // 基于准备好的dom，初始化echarts实例
+    const myChart = echarts.init(document.getElementById('main'));
+    // 指定图表的配置项和数据
+    const option = {
+        /*饼图
+        *   value
+        *   type
+        *   data
+        *       name
+        *       value
+        *   roseType
+        *       radius
+        *       area
+        * */
+        series: [
+            {
+                type:'pie',
+                data:[
+                    {value:200,name:'html'},
+                    {value:100,name:'css'},
+                    {value:300,name:'js'}
+                ],
+                roseType: 'radius'
+            }
+        ]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>富文本</title>
+    <style>
+        #main{
+            margin: 20px;
+            width: 700px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+<!--建立dom 容器-->
+<div id="main"></div>
+<!--引入echarts-->
+<script src="../js/echarts.min.js"></script>
+<script>
+    // 基于准备好的dom，初始化echarts实例
+    const myChart = echarts.init(document.getElementById('main'));
+
+    const option = {
+        series: [{
+            type: 'pie',
+            data: [
+                {value:1,name:'a'},
+                {value:2,name:'b'},
+                {value:3,name:'c'},
+                {
+                    value:4,
+                    name:'d',
+                    label:{
+                        formatter:[
+                            '{a|这段文本采用样式 a}',
+                            '{b|这段文本采用样式 b}',
+                            '这段用默认样式{x|这段用样式 x}'
+                        ].join('\n'),
+
+                        /*文本块的样式设置*/
+                        color: 'chocolate',
+                        fontSize: 10,
+                        fontFamily: 'Arial',
+                        backgroundColor: 'yellow',
+                        padding: [3, 10, 10, 5],
+
+                        /*rich 里是文本片段的样式设置*/
+                        rich: {
+                            a: {
+                                color: '#000',
+                                fontSize: 18,
+                                lineHeight: 24
+                            },
+                            b: {
+                                backgroundColor: {
+                                    image: './images/back.jpg'
+                                },
+                                fontSize: 14,
+                                height: 40,
+                                color:'#fff',
+                            },
+                            x: {
+                                fontSize: 14,
+                                fontFamily: 'Microsoft YaHei',
+                                backgroundColor:'#000',
+                                lineHeight: 32,
+                                padding:9,
+                                color:'yellow'
+                            },
+                        }
+                    }
+                }
+            ],
+        }]
+    };
+    myChart.setOption(option);
+</script>
+</body>
+</html>

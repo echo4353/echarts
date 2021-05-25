@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>仪表盘</title>
+    <style>
+        #main{
+            margin: 20px;
+            width: 700px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+<!--建立dom 容器-->
+<div id="main"></div>
+<!--引入echarts-->
+<script src="../js/echarts.min.js"></script>
+<script>
+    // 基于准备好的dom，初始化echarts实例
+    const myChart = echarts.init(document.getElementById('main'));
+    // 指定图表的配置项和数据
+    const option = {
+        /*
+        * 仪表盘 gauge
+        *   detail 仪表盘详情{formatter:'{value}%'}
+        *   data
+        * */
+        series: [
+            {
+                type: 'gauge',
+                detail: {
+                    formatter:'{value}%'
+                },
+                data: [
+                    {value: 30, name: '完成率'}
+                ]
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+    setInterval(function () {
+        option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
+        myChart.setOption(option, true);
+    },500);
+</script>
+</body>
+</html>

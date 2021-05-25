@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据集</title>
+    <style>
+        #main{
+            margin: 20px;
+            width: 700px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+<!--建立dom 容器-->
+<div id="main"></div>
+<!--引入echarts-->
+<script src="../js/echarts.min.js"></script>
+<script>
+    // 基于准备好的dom，初始化echarts实例
+    const myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    const option = {
+        legend: {},
+        tooltip: {},
+        dataset: {
+            /*dimensions []*/
+            // dimensions:['大前端','人数', '难度'],
+            /*数据源*/
+            source: [
+                // ['大前端','人数', '难度'],
+                ['html',  200,   250],
+                ['css',   100,   150],
+                ['js',    300,   400]
+            ]
+        },
+        xAxis: {type: 'category'},
+        yAxis: {},
+        series: [
+            {
+                type: 'bar',
+                dimensions:['大前端','人数', '难度']
+            },
+            {type: 'bar'},
+        ]
+    }
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</body>
+</html>
